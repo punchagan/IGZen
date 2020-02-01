@@ -1,3 +1,4 @@
+import os
 import time
 
 from selenium import webdriver
@@ -19,7 +20,7 @@ def get_profile():
 
 def post_to_instagram(username, password, photo, caption, share=False):
     browser = webdriver.Firefox(
-        get_profile(), firefox_binary="/usr/bin/firefox-trunk"
+        get_profile(), firefox_binary=os.environ.get("FIREFOX_BINARY", None)
     )
     browser.set_window_position(0, 0)
     browser.set_window_size(500, 1200)
