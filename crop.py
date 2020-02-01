@@ -78,9 +78,10 @@ class ImageCropper:
 
     def rotate(self, image, exif):
         if exif is None:
-            return image
-        if exif["Orientation"] == 6:
+            exif = {}
+        if exif.get("Orientation") == 6:
             return image.rotate(-90)
+        return image
 
     def set_ratio(self, ratio):
         self.ratio = float(ratio)
