@@ -11,7 +11,7 @@ I tried using the Desktop browser with mobile emulation (or a mobile User
 Agent), but the upload experience was pretty bad - you can't pre-process images
 before uploading them if you don't have a touch screen.
 
-~igzen~ lets me pre-process the image using a Python+Tkinter based viewer, and
+`igzen` lets me pre-process the image using a Python+Tkinter based viewer, and
 then uses selenium to post the images.
 
 ## Usage
