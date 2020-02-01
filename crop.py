@@ -141,21 +141,16 @@ class ImageCropper:
         self.canvas.delete(self.message)
 
     def __on_mouse_release(self, event):
-        self.__fix_box_orientation()
         print("box coordinates: %s/%s, %s/%s" % tuple(self.box))
 
-    def __fix_box_orientation(self):
-        if self.box[0] > self.box[2]:
-            self.box[0], self.box[2] = self.box[2], self.box[0]
-        if self.box[1] > self.box[3]:
-            self.box[1], self.box[3] = self.box[3], self.box[1]
-
     def __crop_image(self):
+        l, r = sorted(self.box[::2])
+        t, b = sorted(self.box[1::2])
         box = (
-            int(self.box[0] * self.scale),
-            int(self.box[1] * self.scale),
-            int(self.box[2] * self.scale),
-            int(self.box[3] * self.scale),
+            int(l * self.scale),
+            int(t * self.scale),
+            int(r * self.scale),
+            int(b * self.scale),
         )
         try:
             cropped = self.img.crop(box)
