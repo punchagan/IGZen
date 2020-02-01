@@ -37,7 +37,7 @@ class ImageCropper:
         self.background = []
         self.grid = []
         self.ratio = 1.0
-        self.canvas = tkinter.Canvas(self.root, highlightthickness=2, bd=0)
+        self.canvas = tkinter.Canvas(self.root, highlightthickness=0, bd=0)
 
     def get_image_exif(self, image):
         if image is None:
