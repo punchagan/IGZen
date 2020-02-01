@@ -19,6 +19,7 @@ import tkinter
 class ImageCropper:
     def __init__(self):
         self.root = root = tkinter.Tk()
+        root.geometry("+0+0")
         self.root.bind("<Button-1>", self.__on_mouse_down)
         self.root.bind("<ButtonRelease-1>", self.__on_mouse_release)
         self.root.bind("<B1-Motion>", self.__on_mouse_move)
