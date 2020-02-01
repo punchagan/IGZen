@@ -30,3 +30,7 @@ if __name__ == "__main__":
 
     if photo is not None:
         post_to_instagram(USERNAME, PASSWORD, photo, args.caption, args.share)
+    else:
+        print(
+            "Your selection was not saved. Hit <SPACE> to save it, and continue to posting it."
+        )
