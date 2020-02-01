@@ -21,6 +21,8 @@ def post_to_instagram(username, password, photo, caption, share=False):
     browser = webdriver.Firefox(
         get_profile(), firefox_binary="/usr/bin/firefox-trunk"
     )
+    browser.set_window_position(0, 0)
+    browser.set_window_size(500, 1200)
     browser.get("https://www.instagram.com")
     wait = WebDriverWait(browser, 30)
 
