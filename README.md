@@ -42,6 +42,8 @@ to post without any manual checks, don't use this flag.
 into Instagram. You need to make sure that the browser window opened by the tool
 is the focused window, for everything to work as expected!
 
+![igzen](https://user-images.githubusercontent.com/315678/73592597-1ca4fa00-4522-11ea-8cbe-1dcbb3120a85.gif)
+
 Happy Instagramming!
 
 ## The Name
