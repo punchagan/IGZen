@@ -198,7 +198,6 @@ class ImageCropper:
             self.root.destroy()
 
     def __on_keyUP(self, event):
-        print("UP")
         self.box[1] = self.box[1] - 1
         self.box[3] = self.box[3] - 1
         self.__refresh_rectangle()
@@ -207,16 +206,13 @@ class ImageCropper:
         self.box[1] = self.box[1] + 1
         self.box[3] = self.box[3] + 1
         self.__refresh_rectangle()
-        print("Down")
 
     def __on_keyLeft(self, event):
-        print("Left")
         self.box[0] = self.box[0] - 1
         self.box[2] = self.box[2] - 1
         self.__refresh_rectangle()
 
     def __on_keyRight(self, event):
-        print("Right")
         self.box[0] = self.box[0] + 1
         self.box[2] = self.box[2] + 1
         self.__refresh_rectangle()
