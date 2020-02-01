@@ -138,18 +138,24 @@ class ImageCropper:
     def __on_mouse_down(self, event):
         self.box[0], self.box[1] = event.x, event.y
         self.box[2], self.box[3] = event.x, event.y
-        print("top left coordinates: %s/%s" % (event.x, event.y))
         self.canvas.delete(self.message)
 
     def __on_mouse_release(self, event):
-        print("bottom_right coordinates: %s/%s" % (self.box[2], self.box[3]))
+        self.__fix_box_orientation()
+        print("box coordinates: %s/%s, %s/%s" % tuple(self.box))
+
+    def __fix_box_orientation(self):
+        if self.box[0] > self.box[2]:
+            self.box[0], self.box[2] = self.box[2], self.box[0]
+        if self.box[1] > self.box[3]:
+            self.box[1], self.box[3] = self.box[3], self.box[1]
 
     def __crop_image(self):
         box = (
-            int(self.box[2] * self.scale),
-            int(self.box[3] * self.scale),
             int(self.box[0] * self.scale),
             int(self.box[1] * self.scale),
+            int(self.box[2] * self.scale),
+            int(self.box[3] * self.scale),
         )
         try:
             cropped = self.img.crop(box)
@@ -226,7 +232,8 @@ class ImageCropper:
 
         # Draw background
         w, h = self.resized_img.size
-        r, b, l, t = self.box
+        l, r = sorted(self.box[::2])
+        t, b = sorted(self.box[1::2])
         all_dimensions = (0, 0, l, h), (r, 0, w, h), (0, b, w, h), (0, 0, w, t)
         self.background = [
             self.canvas.create_rectangle(*dimensions, fill="black", width=0)
