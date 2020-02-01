@@ -28,4 +28,5 @@ if __name__ == "__main__":
     else:
         photo = args.image.name
 
-    post_to_instagram(USERNAME, PASSWORD, photo, args.caption, args.share)
+    if photo is not None:
+        post_to_instagram(USERNAME, PASSWORD, photo, args.caption, args.share)

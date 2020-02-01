@@ -7,11 +7,13 @@
 # Source: https://github.com/Lexing/pyImageCropper/blob/master/crop.py
 ########################
 
-from PIL import Image
+import os
+import tempfile
+import sys
+
+from PIL import Image, ImageTk
 from PIL.ExifTags import TAGS
-import sys, os
 import tkinter
-from PIL import ImageTk
 
 
 class ImageCropper:
@@ -29,6 +31,7 @@ class ImageCropper:
         self.rectangle = None
         self.canvas_image = None
         self.canvas_message = None
+        self.outputname = None
         self.files = []
         self.box = [0, 0, 0, 0]
         self.background = []
@@ -86,7 +89,6 @@ class ImageCropper:
             return True
 
         self.filename = filename
-        self.outputname = os.path.join("/tmp", os.path.basename(filename))
         try:
             self.img = Image.open(filename)
         except IOError:
@@ -153,6 +155,10 @@ class ImageCropper:
 
             size = min(1080, cropped.size[0])
             cropped = cropped.resize((size, size), resample=Image.LANCZOS)
+            prefix, suffix = os.path.splitext(os.path.basename(self.filename))
+            _, self.outputname = tempfile.mkstemp(
+                prefix=prefix + "_", suffix=suffix
+            )
             cropped.save(self.outputname, "jpeg")
             self.message = "Saved: " + self.outputname
         except SystemError as e:
