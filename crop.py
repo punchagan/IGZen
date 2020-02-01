@@ -242,7 +242,7 @@ class ImageCropper:
             (l, t + 2 * dy, r, t + 2 * dy),
         ]
         self.grid = [
-            self.canvas.create_line(*line, width=1, fill="white")
+            self.canvas.create_line(*line, width=1, fill="lightblue")
             for line in grid
         ]
 
