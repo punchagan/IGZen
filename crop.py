@@ -35,6 +35,7 @@ class ImageCropper:
         self.files = []
         self.box = [0, 0, 0, 0]
         self.background = []
+        self.grid = []
         self.ratio = 1.0
         self.canvas = tkinter.Canvas(self.root, highlightthickness=2, bd=0)
 
@@ -216,15 +217,32 @@ class ImageCropper:
         self.canvas.delete(self.rectangle)
         for rectangle in self.background:
             self.canvas.delete(rectangle)
+        for line in self.grid:
+            self.canvas.delete(line)
 
         self.rectangle = self.canvas.create_rectangle(*self.box)
+
+        # Draw background
         w, h = self.resized_img.size
         r, b, l, t = self.box
-
         all_dimensions = (0, 0, l, h), (r, 0, w, h), (0, b, w, h), (0, 0, w, t)
         self.background = [
             self.canvas.create_rectangle(*dimensions, fill="black", width=0)
             for dimensions in all_dimensions
+        ]
+
+        # Draw grid lines
+        dx = int((r - l) / 3)
+        dy = int((b - t) / 3)
+        grid = [
+            (l + dx, t, l + dx, b),
+            (l + 2 * dx, t, l + 2 * dx, b),
+            (l, t + dy, r, t + dy),
+            (l, t + 2 * dy, r, t + 2 * dy),
+        ]
+        self.grid = [
+            self.canvas.create_line(*line, width=1, fill="white")
+            for line in grid
         ]
 
     def run(self):
