@@ -8,7 +8,7 @@ from PIL import Image
 from browser import post_to_instagram
 from crop import ImageCropper
 
-USERNAME = os.environ["INSTAGRAM_USER"]
+USERNAME = os.environ["INSTAGRAM_USERNAME"]
 PASSWORD = os.environ["INSTAGRAM_PASSWORD"]
 
 if __name__ == "__main__":
