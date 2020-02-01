@@ -72,4 +72,10 @@ def post_to_instagram(username, password, photo, caption, share=False):
 if __name__ == "__main__":
     import sys
 
-    post_to_instagram(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    username, password, photo, caption = (
+        sys.argv[1],
+        sys.argv[2],
+        sys.argv[3],
+        sys.argv[4],
+    )
+    post_to_instagram(username, password, photo, caption)
