@@ -7,6 +7,7 @@
 # Source: https://github.com/Lexing/pyImageCropper/blob/master/crop.py
 ########################
 
+import math
 import os
 import tempfile
 import sys
@@ -171,10 +172,10 @@ class ImageCropper:
     def __fix_ratio_point(self, px, py):
         dx = px - self.box[0]
         dy = py - self.box[1]
-        if min(int(dy / self.ratio), dx) == dx:
-            dy = int(dx * self.ratio)
+        if min(abs(int(dy / self.ratio)), abs(dx)) == abs(dx):
+            dy = int(math.copysign(dx, dy) * self.ratio)
         else:
-            dx = int(dy / self.ratio)
+            dx = int(math.copysign(dy, dx) / self.ratio)
         return self.box[0] + dx, self.box[1] + dy
 
     def __on_mouse_move(self, event):
