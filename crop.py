@@ -31,6 +31,7 @@ class ImageCropper:
         self.canvas_message = None
         self.files = []
         self.box = [0, 0, 0, 0]
+        self.background = []
         self.ratio = 1.0
         self.canvas = tkinter.Canvas(self.root, highlightthickness=2, bd=0)
 
@@ -207,13 +208,18 @@ class ImageCropper:
 
     def __refresh_rectangle(self):
         self.canvas.delete(self.rectangle)
-        self.rectangle = self.canvas.create_rectangle(
-            self.box[0],
-            self.box[1],
-            self.box[2],
-            self.box[3],
-            outline="white",
-        )
+        for rectangle in self.background:
+            self.canvas.delete(rectangle)
+
+        self.rectangle = self.canvas.create_rectangle(*self.box)
+        w, h = self.resized_img.size
+        r, b, l, t = self.box
+
+        all_dimensions = (0, 0, l, h), (r, 0, w, h), (0, b, w, h), (0, 0, w, t)
+        self.background = [
+            self.canvas.create_rectangle(*dimensions, fill="black", width=0)
+            for dimensions in all_dimensions
+        ]
 
     def run(self):
         self.roll_image()
